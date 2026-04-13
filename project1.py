@@ -19,14 +19,14 @@ data={
 df=pd.DataFrame(data)
 print(df)
 
-# types of data
+
 print(df.dtypes)
 
-# Numerical columns
+# Num column
 print("Numerical Columns:")
 print(df.select_dtypes(include=['int64', 'float64']).columns)
 
-# Categorical columns
+# Cat column
 print("\nCategorical Columns:")
 print(df.select_dtypes(include=['object']).columns)
 
@@ -36,10 +36,10 @@ print("Mean:")
 print(df[["Age_of_house_head","Household_income"]].mean())
 
 print("\nMedian:")
-print(df[["Age_of_house_head", "Household_income"]].median())
+print(df[["Age_of_house_head","Household_income"]].median())
 
 print("\nMode:")
-print(df[["Age_of_house_head", "Household_income"]].mode().iloc[0])
+print(df[["Age_of_house_head","Household_income"]].mode().iloc[0])
 
 
 #measures of Dispersion
@@ -85,15 +85,16 @@ plt.show()
 
 
 
-plt.hist(df["Household_income"], bins=10, density=True)
+plt.hist(df["Household_income"],bins=10,color='green',rwidth=0.5)
 
-mean = df["Household_income"].mean()
-std = df["Household_income"].std()
 
-x = np.linspace(df["Household_income"].min(),
-                df["Household_income"].max(), 100)
+mean=df["Household_income"].mean()
+std=df["Household_income"].std()
 
-y = norm.pdf(x, mean, std)
+x=np.linspace(df["Household_income"].min(),
+                df["Household_income"].max(),100)
+
+y=norm.pdf(x,mean,std)
 
 plt.plot(x, y)
 
@@ -103,24 +104,24 @@ plt.ylabel("Density")
 plt.show()
 
 print("\nSkewness  Kurtosis")
-print("Skewness:", df["Household_income"].skew())
-print("Kurtosis:", df["Household_income"].kurt())
+print("Skewness:",df["Household_income"].skew())
+print("Kurtosis:",df["Household_income"].kurt())
 
 
-sns.histplot(df['Household_income'], kde=True)
+sns.histplot(df['Household_income'])
 plt.title("Income Distribution with KDE")
 plt.xlabel("Income")
 plt.ylabel("Frequency")
 plt.show()
 
 
-sns.boxplot(x="Education_level", y="Family_size",data=df)
+sns.boxplot(x="Education_level",y="Family_size",data=df)
 plt.title("Family Size by Education Level")
 plt.xlabel("Education Level")
 plt.ylabel("Family Size")
 plt.show()
 
-sns.kdeplot(x=df[ "Age_of_house_head"], y=df['Household_income'], cmap="Blues", fill=True)
+sns.kdeplot(x=df["Age_of_house_head"],y=df["Household_income"])
 plt.title("Age vs Income Distribution")
 plt.xlabel("Age")
 plt.ylabel("Income")
